@@ -1,4 +1,5 @@
-package git;
+package testers;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,10 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class IndexTest {
-	
-	
+import git.Blob;
+import git.Index;
 
+class IndexTester {
+	
 	@Test
 	void indexTest() throws IOException {
 		Index ind = new Index();
@@ -22,12 +24,15 @@ class IndexTest {
 		assertTrue(index.exists());
 	}
 	
+	@Test
 	void objectsTest() throws IOException {
 		Index ind = new Index();
 		File objectsDir = new File("Objects");
 		assertTrue(objectsDir.exists());
 	}
-	  void addTest() throws IOException {
+	
+	@Test
+	void addTest() throws IOException {
 		Index ind = new Index();
 		Blob blobbie = new Blob("naalah.txt");
 		File file = new File("naalah.txt");
@@ -35,5 +40,15 @@ class IndexTest {
 		String indexLine = Blob.getContent("index");
 		assertTrue(indexLine.equals(file.getName() + " : " + blobbie.getSha()));
 	}
-
+	
+	@Test
+	void removeTest() throws IOException {
+		Index ind = new Index();
+		Blob blobbie = new Blob("naalah.txt");
+		File file = new File("naalah.txt");
+		ind.addBlob(file.getName());
+		ind.removeBlob(file.getName());
+		String indexLine = Blob.getContent("index");
+		assertTrue(indexLine.equals(""));
+	}
 }

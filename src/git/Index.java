@@ -37,7 +37,7 @@ public class Index {
 	public void removeBlob(String fileName) throws IOException {
 		objects.remove(fileName);
 		writeAllOfIndex();
-		FileWriter fileToDelete = new FileWriter("./objects/"+ objects.get(fileName).getSha());
+		FileWriter fileToDelete = new FileWriter("Objects/"+ objects.get(fileName).getSha());
 		fileToDelete.close(); 	}
 	
 }

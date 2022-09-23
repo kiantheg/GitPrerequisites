@@ -20,9 +20,17 @@ public class Tree {
 		FileWriter myWriter = new FileWriter("Objects/tree");
 
 		for(String pair : list) {
+			Scanner scanner = new Scanner(new File ("index"));
 			pair+="\n";
-		      myWriter.write(pair);
-		      System.out.println("Successfully wrote to the file.");
+		    while (scanner.hasNextLine()) {
+		        String line = scanner.nextLine();
+		        if(line.contains(pair.subSequence(7, pair.length()))) {
+		        	pair+=line.substring(0,line.indexOf(" "));
+		        }
+		    }
+			
+		    myWriter.write(pair);
+		    System.out.println("Successfully wrote to the file.");
 		}
 		myWriter.close();
 		String contents = readFile(tree.getPath(), StandardCharsets.US_ASCII);
